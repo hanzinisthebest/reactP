@@ -1,0 +1,14 @@
+.par {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+.user{
+    color: #2196f3;
+}
+  
+.computer{
+    color: #ff0000;
+  }

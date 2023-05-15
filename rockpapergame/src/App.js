@@ -1,9 +1,9 @@
 import './App.css';
-
+import GameCard from './components/GameCard';
 function App() {
   return (
   <>
-  <p>hello first</p>
+  <GameCard/>
   </>
   );
 }
