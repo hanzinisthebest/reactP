@@ -1,11 +1,14 @@
 
+import { Text } from '@chakra-ui/react';
 import './App.css';
 import AddTask from './components/AddTask';
 function App() {
   return (
     <>
-    <h1>TODO LIST</h1>
-    {/* <AddTask/> */}
+    <Text fontSize={100}>TODO LIST</Text>
+    {/* <Sort/> */}
+    {/* <button>Add Task</button> */}
+    <AddTask/>
     </>
   );
 }
