@@ -4,8 +4,7 @@ import './index.css';
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react'
 import{RouterProvider, createBrowserRouter} from 'react-router-dom'
-import AddTask from './components/AddTask';
-import Example from './components/example';
+
 
 const router = createBrowserRouter([
   { path: '/', element: <App/>}
