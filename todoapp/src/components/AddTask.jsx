@@ -19,9 +19,9 @@ import ItemContext from "../store/ItemContext";
 
 function AddTask() {
   // const navigate = useNavigate()
-  const { items, setItems } = useContext(ItemContext);
+  const { items, setItems,handlerSort } = useContext(ItemContext);
   const [itemTitle, setItemTitle] = useState("");
-  const [itemType, setItemType] = useState("Incomplete");
+  const [itemType, setItemType] = useState("");
   const [itemId,setItemId] = useState(0);
   const [isAdd,setIsAdd] = useState(false);
 
@@ -39,7 +39,14 @@ function AddTask() {
       return;
     }
     setItemId(itemId+1);
-
+    if(items.length ===0){
+      setItems([{
+        id: itemId,
+        title: itemTitle,
+        type: itemType,
+      }])
+      return;
+    }
     setItems((oldItems) => [
       ...oldItems,
       {
@@ -48,6 +55,8 @@ function AddTask() {
         type: itemType,
       },
     ]);
+    console.log(items);
+    handlerSort();
     setItemTitle("");
     setItemType("");
     setIsAdd(false);

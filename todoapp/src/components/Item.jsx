@@ -18,7 +18,7 @@ import { Card, CardHeader, CardBody, CardFooter,Text} from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import ItemContext from "../store/ItemContext";
 function Item(props) {
-  // const { items, setItems } = useContext(ItemContext);
+  const { deleteHandler} = useContext(ItemContext);
   const [title,setTitle] = useState(props.title);
   const [type,setType] = useState(props.type);
   const [editTitle,setEditTitle] = useState(props.title);
@@ -46,6 +46,10 @@ function Item(props) {
     setIsUpdate(true);
   }
   const checkHandler=()=>{
+
+  }
+  const deleteClick=()=>{
+    deleteHandler(props.id);
   }
   return (
   <>
@@ -58,7 +62,7 @@ function Item(props) {
           <Text>{title}</Text>
         </Checkbox>
       </Button>
-        <Button ml={520} mr={2}>
+        <Button ml={520} mr={2} onClick={deleteClick}>
         <DeleteIcon/>    
         </Button>
 
