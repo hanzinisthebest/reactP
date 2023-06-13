@@ -6,9 +6,8 @@ const ItemsList = () => {
   return (
     <>
       <ul>
-        {itemsList.map((item,i) => {
-         return <Item key={i} id={item.id} title={item.title} type={item.type} delete={deleteHandler} />;
-        })}
+        {itemsList.map((item,i) =>  <Item key={i} id={item.id} title={item.title} type={item.type} delete={deleteHandler} />
+        )}
       </ul>
     </>
   );
