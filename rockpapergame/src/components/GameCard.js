@@ -6,7 +6,7 @@ import Result from './Result'
 const userReducer = (state,action)=>{
   if(action.type === 'won'){
     return {didWon:true,value:state.value+1}
-  }
+  } v
   if(action.type === 'loss')
   {
     return {didWon:false, value:state.value}
