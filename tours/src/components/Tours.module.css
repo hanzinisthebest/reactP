@@ -1,0 +1,7 @@
+.tours {
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: start;
+    padding: 2rem 0;
+    display: grid;
+    gap: 2rem;
+}

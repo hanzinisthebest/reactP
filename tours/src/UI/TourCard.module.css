@@ -1,0 +1,64 @@
+.single{
+background: var(--white);
+border-radius: var(--borderRadius);
+box-shadow: var(--shadow-1);
+transition: var(--transition);
+position: relative;
+}
+
+.img{
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.price {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5rem;
+    color: white;
+    letter-spacing: 2px;
+    background:#10b981 ;
+    border-radius: .25rem;
+}
+.info {
+    padding: 2rem 1.5rem;
+}
+.title {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    font-size:1.25rem;
+}
+
+.des {
+    line-height: 1.5;
+    color: grey;
+    margin-bottom: 1.25rem;
+}
+
+.delete {
+    border: 1px solid #10b981;
+    color: #10b981;
+    background: transparent;
+    text-transform: capitalize;
+    cursor: pointer; 
+    width: 100%;
+    padding: 12px 6px;
+}
+.delete:hover{
+    color: aliceblue;
+    background-color: #10b981;
+}
+.show {
+    color: rgb(148, 190, 86);
+    font-weight: 600;
+    
+            background: transparent;
+            border: transparent;
+            text-transform: capitalize;
+            cursor: pointer;
+    
+}
