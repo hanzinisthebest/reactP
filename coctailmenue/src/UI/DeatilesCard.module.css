@@ -1,0 +1,63 @@
+.page {
+    width: 90vw;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.btn {
+    cursor: pointer;
+    color: #fff;
+    background: #10b981;
+    border: transparent;
+    border-radius: .25rem;
+    letter-spacing: 1px;
+    padding: .375rem .75rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+    transition: .3s ease-in-out all;
+    text-transform: capitalize;
+    display: inline-block;
+    margin-bottom: 1rem;
+    text-decoration: none;
+}
+
+.name {
+    font-size: clamp(1.25rem,2.5vw,2.5rem);
+}
+
+.drink {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 3rem;
+   -webkit-box-align: center;
+    align-items: center;
+}
+
+.img {
+    border-radius: .25rem;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+.info {
+    padding-top: 0px;
+}
+.p {
+    font-weight: 700;
+    text-transform: capitalize;
+    line-height: 2;
+    margin-bottom: 1rem;
+}
+
+.data {
+    margin-right: 0.5rem;
+    background: #6ee7b7;
+    padding: 0.25rem 0.5rem;
+    border-radius: .25rem;
+    color: #047857;
+    letter-spacing: 1px;
+}

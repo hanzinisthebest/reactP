@@ -1,0 +1,34 @@
+.nav{
+        background-color:#fff ;
+        flex-direction: row;
+        text-justify:  justify;
+        justify-content: space-between; 
+        width: 90vw;
+        max-width:1120px;
+        margin: 0px auto;
+        display: flex;
+        padding: 1.5rem 2rem;   
+}
+.logo {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    color: #10b981;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+.links {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+    gap: 0.5rem;
+}
+.links a {
+    color:#0f172a;
+    padding: 0.5rem 0.5rem 0.5rem 0px;
+    transition: .3s ease-in-out all;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+.links a.active{
+    color: #10b981;
+}
