@@ -5,7 +5,7 @@ function NavBar() {
   return (
     <header  >
         <nav className={classes.nav}>
-           <span className={classes.logo}>MixMaster</span>
+           <span className={classes.logo}>MixMasters</span>
            <div className={classes.links}>
               <NavLink to='/' className={({ isActive }) =>
                 isActive ? classes.active : undefined
