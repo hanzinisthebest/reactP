@@ -1,4 +1,5 @@
 import React from 'react';
+import Products from '../components/Shop/Products';
 
 interface Props {
   
@@ -7,7 +8,7 @@ interface Props {
 const ProductsPage: React.FC<Props> = () => {
   return (
     <div>
-      <h1>products page</h1>
+      <Products/>
     </div>
   );
 };

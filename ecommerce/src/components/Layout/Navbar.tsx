@@ -5,8 +5,6 @@ import {FaShoppingCart} from "react-icons/fa"
 import {BiSolidUserPlus} from 'react-icons/bi'
 import { useBreakpointValue } from '@chakra-ui/react'
 import IconBurger from '../../Assets/IconBurger';
-import { useSelector } from 'react-redux';
-import { CartState } from '../../models/cart';
 import { useAppSelector } from '../../hooks/redux-hooks';
 import { cartSelector } from '../../Store/cartSlice';
 interface Props {
