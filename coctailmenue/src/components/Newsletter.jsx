@@ -15,7 +15,7 @@ function Newsletter() {
     }
     else{
      alert('thanks');
-      return navigate('/');
+      return navigate('/'); 
     }
   }
   return (

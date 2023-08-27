@@ -3,7 +3,8 @@ import Deatiles from '../components/Deatiles'
 
 function DeatilesPage() {
   return (
-    <Deatiles/>
+    <Deatiles
+    />
   )
 }
 

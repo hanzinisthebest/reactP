@@ -7,9 +7,9 @@ interface Props {
 
 const ProductsPage: React.FC<Props> = () => {
   return (
-    <div>
+    <>
       <Products/>
-    </div>
+    </>
   );
 };
 

@@ -6,10 +6,11 @@ import { SearchIcon } from '@chakra-ui/icons';
 interface Props {
   img:string,
   name:string,
-  price:string
+  price:string,
+  key:string
 }
 
-const ProductDisplayCard: React.FC<Props> = ({img,name,price}) => {
+const ProductDisplayCard: React.FC<Props> = ({img,name,price,key}) => {
   const notToShow = useBreakpointValue({ base: true, md: false });
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   return (
@@ -21,7 +22,7 @@ const ProductDisplayCard: React.FC<Props> = ({img,name,price}) => {
 
       <Box
        as={Link}
-       to={"/"} 
+       to={'/products/:`${key}`'} 
        className={classes.overlay}
        >
         <SearchIcon  color={'#fff'} fontSize={'1.25rem'}/>

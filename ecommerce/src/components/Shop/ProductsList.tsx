@@ -15,16 +15,21 @@ import ProductHomeCard from "../../UI/ProductHomeCard";
 import ProductDisplayCard from "../../UI/ProductDisplayCard";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import ProductListCard from "../../UI/ProductListCard";
+import { formatPrice } from "../../helpers/formatPrice";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
+import { productsSelector, setSort } from "../../Store/productSlice";
+import { getValue } from "@testing-library/user-event/dist/utils";
 
 interface Props {
   items: Product[];
 }
 
-const ProductsList: React.FC<Props> = ({ items }) => {
+const ProductsList: React.FC<Props> = ({ items   }) => {
   const [isMobile] = useMediaQuery("(max-width: 900px)");
   const [isActiveDisplay, setIsActiveDisplay] = useState(true);
   const [isActiveList, setIsActiveList] = useState(false);
-
+  const productsAmount = useAppSelector(productsSelector).productsAmount;
+  const dispatch = useAppDispatch();
   const handelDisplay = () => {
     setIsActiveDisplay(true);
     setIsActiveList(false);
@@ -33,6 +38,9 @@ const ProductsList: React.FC<Props> = ({ items }) => {
     setIsActiveList(true);
     setIsActiveDisplay(false);
   };
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>)=>{
+    dispatch(setSort(event.target.value));
+  }
   return (
     <VStack>
       <HStack
@@ -65,7 +73,7 @@ const ProductsList: React.FC<Props> = ({ items }) => {
           />
         </HStack>
         <Text textTransform={"capitalize"} marginBottom={"0px"}>
-          22 Products Found
+          {productsAmount} Products Found
         </Text>
         {/* <Divider border={'none'} borderTop={'1px solid #bcccdc'} color={'#bcccdc'}/> */}
         {/* <hr style={{border:'none',borderTop:'1px solid #bcccdc'}} /> */}
@@ -78,6 +86,7 @@ const ProductsList: React.FC<Props> = ({ items }) => {
             fontSize={"1rem"}
             textTransform={"capitalize"}
             padding={"0.25rem 0.5rem"}
+            onChange={handleSelectChange}
           >
             <option value="price-lowest">price (lowest)</option>
             <option value="price-highest">price (highest)</option>
@@ -86,44 +95,43 @@ const ProductsList: React.FC<Props> = ({ items }) => {
           </Select>
         </FormControl>
       </HStack>
-      {isActiveDisplay?<HStack
-        display={"grid"}
-        fontSize={"1rem"}
-        gridTemplateColumns={isMobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)"}
-        gap={"2rem 1.5rem"}
-      >
-        {items.map((item) => {
-          return (
-            <ProductDisplayCard
-              img={item.image}
-              name={item.name}
-              price={
-                item.price.toString().substring(0, 3) +
-                "." +
-                item.price.toString().substring(3) +
-                "$"
-              }
-            />
-          );
-        })}
-      </HStack>:
-      <VStack display={'grid'} rowGap={'3rem'} fontSize={'1rem'} >
-        {items.map((item)=>{
-          return(
-            <ProductListCard
-            img={item.image}
-            name={item.name}
-            price={
-              item.price.toString().substring(0, 3) +
-              "." +
-              item.price.toString().substring(3) +
-              "$"
-            }
-            description={item.description.split("authentic")[0]+"authentic"+" ..."}
-             />
-          )
-        })}
-      </VStack>}
+      {isActiveDisplay ? (
+        <HStack
+          display={"grid"}
+          fontSize={"1rem"}
+          gridTemplateColumns={isMobile ? "repeat(2, 1fr)" : "repeat(3, 1fr)"}
+          gap={"2rem 1.5rem"}
+        >
+          {items.map((item) => {
+            return (
+              <ProductDisplayCard
+                key={item.id}
+                img={item.image}
+                name={item.name}
+                price={formatPrice(item.price)}
+              />
+            );
+          })}
+        </HStack>
+      ) : (
+        <VStack display={"grid"} rowGap={"3rem"} fontSize={"1rem"}>
+          {items.map((item) => {
+            return (
+              <ProductListCard
+                key={item.id}
+                img={item.image}
+                name={item.name}
+                price={
+                formatPrice(item.price)
+                }
+                description={
+                  item.description.split("authentic")[0] + "authentic" + " ..."
+                }
+              />
+            );
+          })}
+        </VStack>
+      )}
     </VStack>
   );
 };

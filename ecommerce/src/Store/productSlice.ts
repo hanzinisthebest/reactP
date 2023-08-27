@@ -1,74 +1,139 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from './store';
-import Product from '../models/product';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "./store";
+import Product, { CategoryEnum, ColorsEnum } from "../models/product";
 
+interface IFilter {
+  price: number;
+  category: CategoryEnum;
+  company: string;
+  color: ColorsEnum;
+  shipping: boolean;
+  search: string;
+}
 
-
+type FilterPayload = {
+  [P in keyof IFilter]?: IFilter[P];
+};
 
 interface ProductsState {
   products: Product[];
+  maxFilterPrice: number;
+  productsAmount: number;
+  sort: string;
   filteredProducts: Product[];
-  filters: {
-    price:number;
-    category: string|null;
-    company: string;
-    color: string|undefined;
-
-  };
+  filters: IFilter;
 }
 
 const initialState: ProductsState = {
   products: [],
   filteredProducts: [],
+  maxFilterPrice: 1,
+  productsAmount: 22,
+  sort: "price-lowest",
   filters: {
-    price: 3099.99,
-    category: 'All',
-    company: 'all',
-    color: 'All',
+    price: 0,
+    category: CategoryEnum.All,
+    company: "all",
+    color: ColorsEnum.All,
+    shipping: false,
+    search: "",
   },
 };
 
 const productsSlice = createSlice({
-  name: 'products',
+  name: "products",
   initialState,
   reducers: {
     setProducts(state, action: PayloadAction<Product[]>) {
       state.products = action.payload;
-      state.filteredProducts = applyFilters(state.products,state.filters);
     },
-    setPriceFilter(state, action: PayloadAction<number>) {
-      state.filters.price = action.payload;
-      state.filteredProducts = applyFilters(state.products,state.filters);
+    setFilter(state, action: PayloadAction<FilterPayload>) {
+      state.filters = {
+        ...state.filters,
+        ...action.payload,
+      };
+      state.filteredProducts = applyFilters(state.products, state.filters);
+      state.filteredProducts = sortProducts(state.filteredProducts,state.sort);
+      state.productsAmount = state.filteredProducts.length;
     },
-    setCategoryFilter(state, action: PayloadAction<string|null>) {
-      state.filters.category = action.payload;
-      state.filteredProducts = applyFilters(state.products,state.filters);
-    },
-    setCompanyFilter(state, action: PayloadAction<string>) {
-      state.filters.company = action.payload;
-      state.filteredProducts = applyFilters(state.products,state.filters);
-    },
-    setColorsFilter(state, action: PayloadAction<string|undefined>) {
-      state.filters.color = action.payload;
-      state.filteredProducts = applyFilters(state.products,state.filters);
+    setSort(state,action:PayloadAction<string>){
+      state.sort=action.payload;
+      state.filteredProducts = sortProducts(state.filteredProducts,state.sort);
     },
     initFilters(state) {
-      state.filters = initialState.filters;
-      state.filteredProducts = applyFilters(state.products,state.filters);
+      const highestPrice = highestPriceAmongProducts(state.products);
+      state.maxFilterPrice = highestPrice;
+      state.filters = {
+        ...initialState.filters,
+        price: highestPrice,
+      };
+      state.filteredProducts = applyFilters(state.products, state.filters);
+      state.filteredProducts = sortProducts(state.filteredProducts,state.sort);
+      state.productsAmount = state.filteredProducts.length;
     },
   },
 });
 
-function applyFilters(products: Product[], filters: ProductsState['filters']): Product[] {
-  return products
+const highestPriceAmongProducts = (products: Product[]) => {
+  return Math.max(...products.map((product) => product.price));
+};
+
+function applyFilters(
+  products: Product[],
+  filters: ProductsState["filters"]
+): Product[] {
+  return products.filter((product) => {
+    const isUnderPrice = product.price <= filters.price;
+    const isInCategory =
+      filters.category === "all" ? true : product.category === filters.category;
+    const isInCompany =
+      filters.company === "all" ? true : product.company === filters.company;
+    const isColor =
+      filters.color === "all" ? true : product.colors.includes(filters.color);
+    const isShipping = filters.shipping
+      ? product.hasOwnProperty("shipping")
+        ? true
+        : false
+      : true;
+    const isSearch =
+      filters.search === "" ? true : product.name.includes(filters.search);
+    return (
+      isUnderPrice &&
+      isInCategory &&
+      isInCompany &&
+      isColor &&
+      isShipping &&
+      isSearch
+    );
+  });
+
+  /* return products
     .filter((product) => product.price <= filters.price)
-    .filter((product) =>  product.category === filters.category)
+    .filter((product) => product.category === filters.category)
     .filter((product) => product.company === filters.company)
-     .filter((product)  =>filters.color && product.colors.includes(filters.color));
+    .filter((product) => product.colors.includes(filters.color)); */
 }
 
-export const { setProducts, setPriceFilter, setCategoryFilter, setCompanyFilter, setColorsFilter, initFilters } =
-  productsSlice.actions;
+function sortProducts(products: Product[], sort: string): Product[] {
+  if (sort === "price-lowest") { 
+    return products.sort((a, b) => a.price - b.price);
+  }
+  if (sort === "price-highest") {
+    
+    return products.sort((a, b) => b.price - a.price);
+  }
+  if (sort === "name-a") {
+    
+    return products.sort((a, b) => a.name.localeCompare(b.name));
+  }
+  if (sort === "name-z") {
+    
+    return products.sort((a, b) => b.name.localeCompare(a.name));
+  }
+  return products;
+}
+
+export const { setProducts, setFilter, initFilters,setSort } = productsSlice.actions;
 
 export const productsSelector = (state: RootState) => state.products;
 export default productsSlice.reducer;

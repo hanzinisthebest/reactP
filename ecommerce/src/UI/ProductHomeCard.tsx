@@ -7,7 +7,8 @@ import classes from './ProductHomeCard.module.css'
 interface Props {
   img:string,
   name:string,
-  price:string
+  price:string,
+  key:string
 }
 
 const ProductHomeCard: React.FC<Props> = ({img,name,price}) => {
@@ -22,7 +23,7 @@ const ProductHomeCard: React.FC<Props> = ({img,name,price}) => {
 
       <Box 
        as={Link}
-       to={"/products"} 
+       to={'/products/:`${key}`'}
        className={classes.overlay}
        >
         <SearchIcon  color={'#fff'} fontSize={'1.25rem'}/>
