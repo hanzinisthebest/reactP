@@ -3,14 +3,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 interface Props {
-  key:string,
+  id:string,
   img:string,
   name:string,
   price:string,
-  description: string
+  description: string,
 }
 
-const ProductListCard: React.FC<Props> = ({key,img,name,price,description}) => {
+const ProductListCard: React.FC<Props> = ({id,img,name,price,description}) => {
   return (
     <HStack display={'grid'} gridTemplateColumns={'auto 1fr'} columnGap={'2rem'} alignItems={'center'}>
       <Image src={img} display={'block'} width={'300px'} height={'200px'} objectFit={'cover'} borderRadius={'0.25rem'} marginBottom={'1rem'}/>
@@ -18,7 +18,7 @@ const ProductListCard: React.FC<Props> = ({key,img,name,price,description}) => {
         <Heading as={'h4'} fontSize={'1.5rem'} marginBottom={'0.5rem'} lineHeight={1}>{name}</Heading>
         <Text color={'#ab7a5f'} fontSize={'1rem'} marginBottom={'0.75rem'} >{price}</Text>
         <Text maxWidth={'45em'} marginBottom={'1rem'} color={'#324d67'}>{description}</Text>
-        <Box as={Link} to={'/products/:`${key}`'} 
+        <Box as={Link} to={`/products/${id}`} 
         fontSize={'0.5rem'}
          background= {'#ab7a5f'}
          borderColor={'transparent'} 

@@ -7,10 +7,10 @@ interface Props {
   img:string,
   name:string,
   price:string,
-  key:string
+  id:string
 }
 
-const ProductDisplayCard: React.FC<Props> = ({img,name,price,key}) => {
+const ProductDisplayCard: React.FC<Props> = ({img,name,price,id}) => {
   const notToShow = useBreakpointValue({ base: true, md: false });
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   return (
@@ -22,7 +22,7 @@ const ProductDisplayCard: React.FC<Props> = ({img,name,price,key}) => {
 
       <Box
        as={Link}
-       to={'/products/:`${key}`'} 
+       to={`/products/${id}`} 
        className={classes.overlay}
        >
         <SearchIcon  color={'#fff'} fontSize={'1.25rem'}/>

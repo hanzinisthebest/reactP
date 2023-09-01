@@ -23,7 +23,7 @@ const ShippingFilter: React.FC<Props> = () => {
     }
   return (
     <FormControl>
-    <Checkbox onChange={handelClick} >Free Shipping</Checkbox>
+    <Checkbox onChange={handelClick}>Free Shipping</Checkbox>
     </FormControl>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Product from "../../models/product";
 import {
   Button,
+  Divider,
   FormControl,
   FormLabel,
   HStack,
@@ -75,6 +76,7 @@ const ProductsList: React.FC<Props> = ({ items   }) => {
         <Text textTransform={"capitalize"} marginBottom={"0px"}>
           {productsAmount} Products Found
         </Text>
+        {/* <Divider borderTop={'1px solid #bcccdc'}/> */}
         {/* <Divider border={'none'} borderTop={'1px solid #bcccdc'} color={'#bcccdc'}/> */}
         {/* <hr style={{border:'none',borderTop:'1px solid #bcccdc'}} /> */}
 
@@ -105,7 +107,7 @@ const ProductsList: React.FC<Props> = ({ items   }) => {
           {items.map((item) => {
             return (
               <ProductDisplayCard
-                key={item.id}
+                id={item.id}
                 img={item.image}
                 name={item.name}
                 price={formatPrice(item.price)}
@@ -118,7 +120,7 @@ const ProductsList: React.FC<Props> = ({ items   }) => {
           {items.map((item) => {
             return (
               <ProductListCard
-                key={item.id}
+                id={item.id}
                 img={item.image}
                 name={item.name}
                 price={

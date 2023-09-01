@@ -70,7 +70,7 @@ const ProductsDisplay: React.FC<Props> = () => {
             products[6].price.toString().substring(3) +
             "$"
           }
-          key={products[6].id}
+          id={products[6].id}
         />
         <ProductHomeCard
           img={products[7].image}
@@ -81,7 +81,7 @@ const ProductsDisplay: React.FC<Props> = () => {
             products[7].price.toString().substring(3) +
             "$"
           }
-          key={products[7].id}
+          id={products[7].id}
         />
         <ProductHomeCard
           img={products[10].image}
@@ -92,7 +92,7 @@ const ProductsDisplay: React.FC<Props> = () => {
             products[10].price.toString().substring(3) +
             "$"
           }
-          key={products[10].id}
+          id={products[10].id}
         />
       </HStack>
       <Button

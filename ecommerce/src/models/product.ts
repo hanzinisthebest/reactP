@@ -23,6 +23,39 @@ export enum ColorsEnum{
 //   ZTOA = "name-z"
 // }
 
+interface thumbnail{
+  url:string,
+width:number,
+height:number
+}
+interface thumbnails{
+small:thumbnail,
+large:thumbnail,
+full:thumbnail
+}
+interface image{
+  id:string,
+  width:number,
+  url:string,
+  filename:string,
+  size:number,
+  type:string,
+  thumbnails:thumbnails
+}
+export interface SingalProduct{
+  id: string;
+  stock:number;
+  name: string;
+  price: number;
+  images: image[];
+  colors: string[];
+  company: string;
+  description: string;
+  category: CategoryEnum;
+  shipping: boolean;
+  reviews:number;
+  stars:number;
+}
 interface Product {
   id: string;
   name: string;
@@ -34,5 +67,6 @@ interface Product {
   category: CategoryEnum;
   shipping: boolean;
 }
+
 
 export default Product;
